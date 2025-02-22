@@ -1,6 +1,7 @@
 package com.revature.Services;
 
-import com.revature.DAOs.EmployeeDAO;
+import com.revature.DAOs.UserDAO;
+import com.revature.DTOs.OutgoingUserDTO;
 import com.revature.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,18 +9,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService
 {
-    private final EmployeeDAO employeeDAO;
+    private final UserDAO userDAO;
 
     @Autowired
 
-    public AuthService(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    public AuthService(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
-    public User registerEmployee(User user)
+    public OutgoingUserDTO registerEmployee(User user)
     {
-        //TODO: input validation
+        if (user.getUsername() == null || user.getUsername().isBlank())
+        {
+            throw new IllegalArgumentException("Username cannot be empty!");
+        }
+        else if (user.getPassword() == null || user.getPassword().isBlank())
+        {
+            throw new IllegalArgumentException("Password cannot be empty!");
+        }
+        else if (user.getPassword().length() < 8)
+        {
+            throw new IllegalArgumentException("Password cannot be shorter than 8 characters!");
+        }
 
-        return employeeDAO.save(user);
+
+        return new OutgoingUserDTO(userDAO.save(user));
     }
 }

@@ -10,7 +10,7 @@ public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employeeId;
+    private int userId;
 
     private String firstName;
 
@@ -29,10 +29,10 @@ public class User
     {
     }
 
-    public User(int employeeId, String firstName, String lastName,
+    public User(int userId, String firstName, String lastName,
                 String username, String password, String role)
     {
-        this.employeeId = employeeId;
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -40,14 +40,14 @@ public class User
         this.role = role;
     }
 
-    public int getEmployeeId()
+    public int getUserId()
     {
-        return employeeId;
+        return userId;
     }
 
-    public void setEmployeeId(int employeeId)
+    public void setUserId(int userId)
     {
-        this.employeeId = employeeId;
+        this.userId = userId;
     }
 
     public String getFirstName()
@@ -104,7 +104,7 @@ public class User
     public String toString()
     {
         return "Employee{" +
-                "employeeId=" + employeeId +
+                "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +

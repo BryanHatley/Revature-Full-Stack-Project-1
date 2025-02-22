@@ -18,6 +18,8 @@ public class Reimbursement
 
     private String status;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
     private User user;
 
     // boilerplate-----------------
