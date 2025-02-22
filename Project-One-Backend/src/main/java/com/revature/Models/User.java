@@ -5,14 +5,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name = "employees")
-public class Employee
+@Table(name = "users")
+public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
 
-    @Column(nullable = false)
+    private String firstName;
+
+    private String lastName;
+
+    @Column(nullable = false, unique = true)
     private String username;
 
     private String password;
@@ -21,13 +25,16 @@ public class Employee
 
 //    Boilerplate --------------------
 
-    public Employee()
+    public User()
     {
     }
 
-    public Employee(int employeeId, String username, String password, String role)
+    public User(int employeeId, String firstName, String lastName,
+                String username, String password, String role)
     {
         this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -41,6 +48,26 @@ public class Employee
     public void setEmployeeId(int employeeId)
     {
         this.employeeId = employeeId;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName)
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName(String lastName)
+    {
+        this.lastName = lastName;
     }
 
     public String getUsername()
@@ -78,6 +105,8 @@ public class Employee
     {
         return "Employee{" +
                 "employeeId=" + employeeId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +

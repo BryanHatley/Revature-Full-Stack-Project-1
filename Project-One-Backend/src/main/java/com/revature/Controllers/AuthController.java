@@ -1,10 +1,9 @@
 package com.revature.Controllers;
 
-import com.revature.Models.Employee;
+import com.revature.Models.User;
 import com.revature.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +23,12 @@ public class AuthController
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Employee> registerEmployee(@RequestBody Employee employee)
+    public ResponseEntity<User> registerEmployee(@RequestBody User user)
     {
         //Send user data to service to create account
-        Employee createdEmployee = authService.registerEmployee(employee);
+        User createdUser = authService.registerEmployee(user);
 
-        //Return creatred user as JSON
-        return  ResponseEntity.ok(createdEmployee);
+        //Return created user as JSON
+        return  ResponseEntity.ok(createdUser);
     }
 }

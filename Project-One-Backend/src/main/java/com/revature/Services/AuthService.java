@@ -1,7 +1,7 @@
 package com.revature.Services;
 
 import com.revature.DAOs.EmployeeDAO;
-import com.revature.Models.Employee;
+import com.revature.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,10 @@ public class AuthService
         this.employeeDAO = employeeDAO;
     }
 
-    public Employee registerEmployee(Employee employee)
+    public User registerEmployee(User user)
     {
         //TODO: input validation
 
-        return employeeDAO.save(employee);
+        return employeeDAO.save(user);
     }
 }
