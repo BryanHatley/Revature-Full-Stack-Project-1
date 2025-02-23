@@ -106,5 +106,21 @@ public class ReimbursementService
         return new OutgoingReimbursementDTO(reimbursementDAO.save(reimbursement));
     }
 
+    public OutgoingReimbursementDTO updateReimbursementStatus(String status, int rId)
+    {
+         Reimbursement returnedReimbursement = reimbursementDAO.findById(rId).orElse(null);
+
+         if(returnedReimbursement == null)
+         {
+             throw new IllegalArgumentException("Reimbursement does not exist!");
+         }
+         else
+         {
+             returnedReimbursement.setStatus(status);
+             reimbursementDAO.save(returnedReimbursement);
+         }
+
+         return new OutgoingReimbursementDTO(returnedReimbursement);
+    }
 
 }

@@ -4,7 +4,9 @@ import com.revature.Annotations.ManagerOnly;
 import com.revature.DTOs.IncomingReimbursementDTO;
 import com.revature.DTOs.OutgoingReimbursementDTO;
 import com.revature.Services.ReimbursementService;
+import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,5 +55,13 @@ public class ReimbursementController
     public ResponseEntity<List<OutgoingReimbursementDTO>> getPendingReimbursementsByUser(@PathVariable int userId)
     {
         return ResponseEntity.accepted().body(reimbursementService.getReimbursementsByStatusAndUser("pending", userId));
+    }
+
+    @PatchMapping("/{reImbursementId}/{status}")
+    @ManagerOnly
+    public ResponseEntity<OutgoingReimbursementDTO> updateReimbursementStatusById(@PathVariable String status, @PathVariable int reImbursementId)
+    {
+
+        return ResponseEntity.ok(reimbursementService.updateReimbursementStatus(status, reImbursementId));
     }
 }
