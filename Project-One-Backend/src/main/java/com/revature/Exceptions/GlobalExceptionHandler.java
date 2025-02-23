@@ -14,11 +14,17 @@ public class GlobalExceptionHandler
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 
+    // Handle UnauthorizedUser exception
+    @ExceptionHandler(UnauthorizedUserException.class)
+    public ResponseEntity<String> handleUnauthorizedUserException(UnauthorizedUserException e)
+    {
+        return ResponseEntity.status(401).body(e.getMessage());
+    }
 
     // Handle any other exceptions
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleUncheckedException(Exception e)
-    {
-        return ResponseEntity.internalServerError().body(e.getMessage());
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<String> handleUncheckedException(Exception e)
+//    {
+//        return ResponseEntity.internalServerError().body("Oops, something went wrong try again later.");
+//    }
 }

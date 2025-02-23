@@ -1,6 +1,7 @@
 package com.revature.Services;
 
 import com.revature.DAOs.UserDAO;
+import com.revature.DTOs.LoginDTO;
 import com.revature.DTOs.OutgoingUserDTO;
 import com.revature.Models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,27 @@ public class AuthService
 
 
         return new OutgoingUserDTO(userDAO.save(user));
+    }
+
+    public OutgoingUserDTO login(LoginDTO loginDTO)
+    {
+        if (loginDTO.getUsername() == null || loginDTO.getUsername().isBlank())
+        {
+            throw new IllegalArgumentException("Username cannot be empty!");
+        }
+        else if (loginDTO.getPassword() == null || loginDTO.getPassword().isBlank())
+        {
+            throw new IllegalArgumentException("Password cannot be empty!");
+        }
+
+        User returnedUser = userDAO.findByUsernameAndPassword(loginDTO.getUsername(),
+                loginDTO.getPassword()).orElse(null);
+
+        if(returnedUser == null)
+        {
+            throw new IllegalArgumentException("Invalid username or password!");
+        }
+
+        return new OutgoingUserDTO(returnedUser);
     }
 }

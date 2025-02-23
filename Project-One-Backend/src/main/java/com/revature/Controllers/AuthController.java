@@ -1,8 +1,10 @@
 package com.revature.Controllers;
 
+import com.revature.DTOs.LoginDTO;
 import com.revature.DTOs.OutgoingUserDTO;
 import com.revature.Models.User;
 import com.revature.Services.AuthService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,5 +34,17 @@ public class AuthController
 
         //Return created user as JSON
         return  ResponseEntity.ok(createdUser);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<OutgoingUserDTO> login(@RequestBody LoginDTO loginDTO, HttpSession session)
+    {
+        OutgoingUserDTO loggedInUser = authService.login(loginDTO);
+
+        session.setAttribute("userId", loggedInUser.getUserId());
+        session.setAttribute("username", loggedInUser.getUsername());
+        session.setAttribute("role", loggedInUser.getRole());
+
+        return ResponseEntity.ok(loggedInUser);
     }
 }

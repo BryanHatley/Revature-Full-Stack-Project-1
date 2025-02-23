@@ -1,45 +1,38 @@
-package com.revature.Models;
+package com.revature.DTOs;
 
-import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.stereotype.Component;
 
-@Component
-@Entity
-@Table(name = "reimbursements")
-public class Reimbursement
+import com.revature.Models.Reimbursement;
+
+public class OutgoingReimbursementDTO
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reimbursementID;
-
     private String description;
-
     private double amount;
+    private String status;
+    private OutgoingUserDTO outgoingUserDTO;
 
-    private String status = "pending";
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "userId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
-
-    // boilerplate-----------------
+    // boilerplate------------------------
 
 
-    public Reimbursement()
-    {
+    public OutgoingReimbursementDTO() {
     }
 
-    public Reimbursement(int reimbursementID, String description,
-                         double amount, String status, User user)
-    {
+    public OutgoingReimbursementDTO(int reimbursementID, String description, double amount,
+                                    String status, OutgoingUserDTO outgoingUserDTO) {
         this.reimbursementID = reimbursementID;
         this.description = description;
         this.amount = amount;
         this.status = status;
-        this.user = user;
+        this.outgoingUserDTO = outgoingUserDTO;
+    }
+
+    public OutgoingReimbursementDTO(Reimbursement r)
+    {
+        this.reimbursementID = r.getReimbursementID();
+        this.description = r.getDescription();
+        this.amount = r.getAmount();
+        this.status = r.getStatus();
+        this.outgoingUserDTO = new OutgoingUserDTO(r.getUser());
     }
 
     public int getReimbursementID()
@@ -82,25 +75,25 @@ public class Reimbursement
         this.status = status;
     }
 
-    public User getUser()
+    public OutgoingUserDTO getOutgoingUserDTO()
     {
-        return user;
+        return outgoingUserDTO;
     }
 
-    public void setUser(User user)
+    public void setOutgoingUserDTO(OutgoingUserDTO outgoingUserDTO)
     {
-        this.user = user;
+        this.outgoingUserDTO = outgoingUserDTO;
     }
 
     @Override
     public String toString()
     {
-        return "reimbursement{" +
+        return "OutgoingReimbursementDTO{" +
                 "reimbursementID=" + reimbursementID +
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", status='" + status + '\'' +
-                ", user=" + user +
+                ", outgoingUserDTO=" + outgoingUserDTO +
                 '}';
     }
 }
