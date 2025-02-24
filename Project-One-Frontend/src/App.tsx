@@ -10,7 +10,7 @@ import CreateNewReimbursement from './Components/Reimbursement/CreateNewReimburs
 function App() {
 
   return (
-    <>
+    <body className="bg-secondary">
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Login/>}/>
@@ -20,7 +20,7 @@ function App() {
           <Route path="/reimbursements/new" element={<CreateNewReimbursement/>}/>
         </Routes>
       </BrowserRouter>
-    </>
+    </body>
   )
 }
 

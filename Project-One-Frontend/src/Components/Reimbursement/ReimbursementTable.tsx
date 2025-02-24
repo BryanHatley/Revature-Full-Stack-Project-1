@@ -132,7 +132,7 @@ function ReimbursementTable ()
         if (store.loggedInUser.role == "manager")
         {
             return(
-                <Table className="table-dark table-hover table-striped w-50">
+                <Table className="table-dark outline-secondary table-hover table-striped w-85">
                     <thead>
                         <tr>
                             <th>Reimbursement ID</th>
@@ -143,7 +143,7 @@ function ReimbursementTable ()
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="outline-secondary">
                     {
                     reimbursements.map((reimbursement:Reimbursement) =>
                         (
@@ -153,7 +153,7 @@ function ReimbursementTable ()
                                 <td>${reimbursement.amount}</td>
                                 <td>{reimbursement.status}</td>
                                 <td>{reimbursement.userId}</td>
-                                <td>
+                                <td className="flex-row">
                                     <Button variant="outline-success" onClick={() => updateReimbursement(reimbursement.reimbursementID, 1)}>Approve</Button>
                                     <Button variant="outline-danger" onClick={() => updateReimbursement(reimbursement.reimbursementID,2)}>Deny</Button>
                                 </td>
@@ -167,7 +167,7 @@ function ReimbursementTable ()
         else
         {
             return(
-                <Table className="table-dark table-hover table-striped w-50">
+                <Table className="table-secondary table-hover table-striped w-50">
                     <thead>
                         <tr>
                             <th>Reimbursement ID</th>
@@ -176,7 +176,7 @@ function ReimbursementTable ()
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="table-dark">
                     {
                     reimbursements.map((reimbursement:Reimbursement) =>
                         (
@@ -199,13 +199,13 @@ function ReimbursementTable ()
         if (store.loggedInUser.role == "manager")
         {
             return(
-                <div>
-                    <Button className="btn-dark" onClick={() => {Logout(); navigate("/");}}>Logout</Button>
-                    <Button className="btn-dark" onClick={() => {getAllReimbursements(1), showValue = 1}}>Show All</Button>
-                    <Button className="btn-dark" onClick={() => {getAllReimbursements(2), showValue = 2}}>Show All Your Reimbursements</Button>
-                    <Button className="btn-dark" onClick={() => {getAllReimbursements(3), showValue = 3}}>Show All Pending</Button>
-                    <Button className="btn-dark" onClick={() => {getAllReimbursements(4), showValue = 4}}>Show All Your Pending</Button>
-                    <Button className="btn-dark" onClick={() => navigate("/reimbursements/new")}>Create New Reimbursment</Button>
+                <div className="d-flex flex-row justify-items-center  mt-3">
+                    <Button variant="outline-dark" onClick={() => {getAllReimbursements(1), showValue = 1}}>Show All</Button>
+                    <Button variant="outline-dark" onClick={() => {getAllReimbursements(2), showValue = 2}}>Show All Your Reimbursements</Button>
+                    <Button variant="outline-dark" onClick={() => {getAllReimbursements(3), showValue = 3}}>Show All Pending</Button>
+                    <Button variant="outline-dark" onClick={() => {getAllReimbursements(4), showValue = 4}}>Show All Your Pending</Button>
+                    <Button variant="outline-dark" onClick={() => navigate("/reimbursements/new")}>Create New Reimbursment</Button>
+                    <Button variant="outline-warning" onClick={() => navigate("/users")}>Users</Button>
                 </div>
             )
         }
@@ -213,7 +213,6 @@ function ReimbursementTable ()
         {
             return(
                 <div>
-                    <Button className="btn-dark" onClick={() => {Logout(); navigate("/");}}>Logout</Button>
                     <Button className="btn-dark" onClick={() => getAllReimbursements(2)}>Show All</Button>
                     <Button className="btn-dark" onClick={() => getAllReimbursements(4)}>Show All Pending</Button>
                     <Button className="btn-dark" onClick={() => navigate("/reimbursements/new")}>Create New Reimbursment</Button>
@@ -229,6 +228,9 @@ function ReimbursementTable ()
             <h3>Reimbursements:</h3>
 
             {displayReimbursements()}
+            <div className="">
+                <Button className="btn-danger" onClick={() => {Logout(); navigate("/");}}>Logout</Button>
+            </div>
             
         </Container>
     )
