@@ -4,9 +4,7 @@ import com.revature.Annotations.ManagerOnly;
 import com.revature.DTOs.IncomingReimbursementDTO;
 import com.revature.DTOs.OutgoingReimbursementDTO;
 import com.revature.Services.ReimbursementService;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JsonParser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/reimbursements")
+@CrossOrigin(value = "http://localhost:5173", allowCredentials = "true")
 public class ReimbursementController
 {
     private final ReimbursementService reimbursementService;

@@ -32,6 +32,10 @@ public class AuthService
         {
             throw new IllegalArgumentException("Password cannot be shorter than 8 characters!");
         }
+        else if (user.getFirstName().isBlank() || user.getLastName().isBlank())
+        {
+            throw new IllegalArgumentException("User must have a First and Last Name!");
+        }
 
 
         return new OutgoingUserDTO(userDAO.save(user));
