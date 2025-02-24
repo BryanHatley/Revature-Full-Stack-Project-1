@@ -6,7 +6,6 @@ import { Reimbursement } from "../Interfaces/Reimbursement";
 import { useEffect, useState } from "react";
 import { store } from "../GlobalData/store";
 import axios from "axios";
-import CreateNewReimbursement from "./CreateNewReimbursement";
 
 function ReimbursementTable ()
 {
@@ -121,6 +120,13 @@ function ReimbursementTable ()
         }
     }
 
+    // const displayUserId = (r:Reimbursement) => 
+    // {
+    //     const user:User = r.user;
+    //     return (
+    //         <td>{user.userId}</td>
+    //     )
+    // }
     const displayReimbursements = () =>
     {
         if (store.loggedInUser.role == "manager")
@@ -146,7 +152,7 @@ function ReimbursementTable ()
                                 <td>{reimbursement.description}</td>
                                 <td>${reimbursement.amount}</td>
                                 <td>{reimbursement.status}</td>
-                                {/* <td>{reimbursement.user.userId}</td> */}
+                                <td>{reimbursement.userId}</td>
                                 <td>
                                     <Button variant="outline-success" onClick={() => updateReimbursement(reimbursement.reimbursementID, 1)}>Approve</Button>
                                     <Button variant="outline-danger" onClick={() => updateReimbursement(reimbursement.reimbursementID,2)}>Deny</Button>

@@ -9,7 +9,7 @@ public class OutgoingReimbursementDTO
     private String description;
     private double amount;
     private String status;
-    private OutgoingUserDTO outgoingUserDTO;
+    private int userId;
 
     // boilerplate------------------------
 
@@ -18,12 +18,12 @@ public class OutgoingReimbursementDTO
     }
 
     public OutgoingReimbursementDTO(int reimbursementID, String description, double amount,
-                                    String status, OutgoingUserDTO outgoingUserDTO) {
+                                    String status, int userId) {
         this.reimbursementID = reimbursementID;
         this.description = description;
         this.amount = amount;
         this.status = status;
-        this.outgoingUserDTO = outgoingUserDTO;
+        this.userId = userId;
     }
 
     public OutgoingReimbursementDTO(Reimbursement r)
@@ -32,7 +32,7 @@ public class OutgoingReimbursementDTO
         this.description = r.getDescription();
         this.amount = r.getAmount();
         this.status = r.getStatus();
-        this.outgoingUserDTO = new OutgoingUserDTO(r.getUser());
+        this.userId = r.getUser().getUserId();
     }
 
     public int getReimbursementID()
@@ -75,14 +75,14 @@ public class OutgoingReimbursementDTO
         this.status = status;
     }
 
-    public OutgoingUserDTO getOutgoingUserDTO()
+    public int getUserId()
     {
-        return outgoingUserDTO;
+        return userId;
     }
 
-    public void setOutgoingUserDTO(OutgoingUserDTO outgoingUserDTO)
+    public void setUserId(int userId)
     {
-        this.outgoingUserDTO = outgoingUserDTO;
+        this.userId = userId;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class OutgoingReimbursementDTO
                 ", description='" + description + '\'' +
                 ", amount=" + amount +
                 ", status='" + status + '\'' +
-                ", outgoingUserDTO=" + outgoingUserDTO +
+                ", userId=" + userId +
                 '}';
     }
 }

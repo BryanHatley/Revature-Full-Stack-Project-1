@@ -7,5 +7,5 @@ export interface Reimbursement {
     description:string,
     amount:number,
     status:string,
-    user:User
+    userId:number
 }

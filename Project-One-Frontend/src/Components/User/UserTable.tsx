@@ -74,6 +74,8 @@ function UserTable ()
                     <tr>
                         <th>User ID</th>
                         <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Role</th>
                         <th></th>
                     </tr>
@@ -85,6 +87,8 @@ function UserTable ()
                             <tr key={user.userId}>
                                 <td>{user.userId}</td>
                                 <td>{user.username}</td>
+                                <td>{user.firstName}</td>
+                                <td>{user.lastName}</td>
                                 <td>{user.role}</td>
                                 <td>
                                     {/* <Button variant="outline-success" onClick={() => updateUser(user)}>Promote</Button> */}
